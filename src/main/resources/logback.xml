@@ -8,7 +8,7 @@
         </encoder>
     </appender>
 
-    <logger name="micronaut.data" level="debug" />
+    <logger name="micronaut.data" level="trace" />
     <root level="info">
         <appender-ref ref="STDOUT" />
     </root>

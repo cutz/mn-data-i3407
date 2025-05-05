@@ -8,16 +8,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
+import java.util.List;
+
 @MappedEntity("asset")
-public record Asset (
+public record AssetManyToMany(
         @EmbeddedId
         AssetId id,
 
         String title,
 
-        @Nullable
-        @Relation(value = Relation.Kind.ONE_TO_ONE, cascade = Relation.Cascade.NONE)
+        @Relation(value = Relation.Kind.ONE_TO_MANY, cascade = Relation.Cascade.NONE)
         @JoinColumn(name="container_id", referencedColumnName = "container_id")
         @JoinColumn(name="asset_id", referencedColumnName = "asset_id")
-        AssetMetadata metadata
+        List<AssetMetadata> metadata
 ) { }

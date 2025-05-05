@@ -7,9 +7,11 @@ import io.micronaut.data.repository.CrudRepository;
 import io.micronaut.data.repository.jpa.JpaSpecificationExecutor;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
-public interface AssetRepository extends CrudRepository<Asset, AssetId>, JpaSpecificationExecutor<Asset> {
+public interface AssetManyToManyRepository extends CrudRepository<AssetManyToMany, AssetId>, JpaSpecificationExecutor<Asset> {
+
     @Join("metadata")
-    Optional<Asset> findById(AssetId id);
+    Optional<AssetManyToMany> findById(AssetId id);
 }

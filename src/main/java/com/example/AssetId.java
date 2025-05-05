@@ -1,8 +1,9 @@
 package com.example;
 
 import io.micronaut.data.annotation.Embeddable;
+import io.micronaut.data.annotation.MappedProperty;
 
 import java.util.UUID;
 
 @Embeddable
-public record AssetId (UUID containerId, int assetId) { }
+public record AssetId (@MappedProperty("container_id") UUID containerId, @MappedProperty("asset_id") int assetId) { }
