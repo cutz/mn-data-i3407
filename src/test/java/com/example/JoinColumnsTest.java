@@ -22,20 +22,24 @@ class JoinColumnsTest {
     AssetMetadataRepository assetMetadataRepository;
 
     @Test
-    void demonstrateJoinIssue(Connection connection){
+    void demonstrateOneToOneSaveFailure(Connection connection) {
 
         AssetId id = new AssetId(UUID.randomUUID(), 1);
-        assetMetadataRepository.save(new AssetMetadata(id, "huey"));
 
         Asset asset = new Asset(id, "title", null);
         assetRepository.save(asset);
-
-        Asset loadedWithJoin = assetRepository.findById(id).orElseThrow();
-        assert loadedWithJoin.metadata().author().equals("huey");
     }
 
     @Test
-    void demonstrateJoinIssueManyToMany(Connection connection){
+    void demonstrateOneToOneFetchFailure(Connection connection) {
+
+        AssetId id = new AssetId(UUID.fromString("6f8d3ed4-46e3-4656-9e89-cd61ac1e4cf8"), 1);
+        Asset asset = assetRepository.findById(id).orElseThrow();
+        assert asset.metadata().author().equals("chris");
+    }
+
+    @Test
+    void demonstrateJoinIssueWorksManyToMany(Connection connection){
 
         AssetId id = new AssetId(UUID.randomUUID(), 1);
         assetMetadataRepository.save(new AssetMetadata(id, "huey"));
